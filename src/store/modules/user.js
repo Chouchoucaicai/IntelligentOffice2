@@ -28,7 +28,7 @@ const mutations = {
 }
 
 const actions = {
-  // user login
+  // 用户登录
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
@@ -43,14 +43,14 @@ const actions = {
     })
   },
 
-  // get user info
+  // 获取用户信息
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const { data } = response
 
         if (!data) {
-          return reject('Verification failed, please Login again.')
+          return reject('验证失败, 请重新登录.')
         }
 
         const { name, avatar } = data
@@ -64,11 +64,11 @@ const actions = {
     })
   },
 
-  // user logout
+  // 用户登出
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
-        removeToken() // must remove  token  first
+        removeToken() // 第一步必须移除token
         resetRouter()
         commit('RESET_STATE')
         resolve()
@@ -78,10 +78,10 @@ const actions = {
     })
   },
 
-  // remove token
+  // 移除 token
   resetToken({ commit }) {
     return new Promise(resolve => {
-      removeToken() // must remove  token  first
+      removeToken() // 第一步必须移除token
       commit('RESET_STATE')
       resolve()
     })
